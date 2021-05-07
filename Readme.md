@@ -18,3 +18,7 @@
 # API Docs
 
 API docs are available here: https://documenter.getpostman.com/view/6998749/TzRPkVgN
+
+# Postman 
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/2d0f019400bf2cb7c554?action=collection%2Fimport#?env%5BMovement%20Pass%5D=W3sia2V5IjoiQVBQX1VSTCIsInZhbHVlIjoiaHR0cDovL2FwcC50ZXN0OjgwMjAiLCJlbmFibGVkIjp0cnVlfV0=)
