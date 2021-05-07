@@ -85,6 +85,8 @@ services:
     ports:
       - "10220:1025"
       - "60220:8025"
+    networks:
+      - app-network
 
 #Networks
 networks:
