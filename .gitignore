@@ -1,0 +1,7 @@
+.idea
+.DS_Store
+/_source_/vendor
+/_source_/.env
+.phpunit.result.cache
+log/nginx/access.log
+log/nginx/error.log
