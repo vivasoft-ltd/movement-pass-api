@@ -11,6 +11,10 @@
 3. Mongo Express Server - `http://127.0.0.1:8021` (Basic Auth: username: `vivasoft`, password: `vivasoft`)
 4. Mail Catcher - `http://127.0.0.1:60220`
 
+# Access Docker Container
+
+1. To access application container: `docker-compose exec pass_app bash`
+
 # API Docs
 
 API docs are available here: https://documenter.getpostman.com/view/6998749/TzRPkVgN
