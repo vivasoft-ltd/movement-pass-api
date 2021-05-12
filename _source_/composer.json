@@ -11,6 +11,7 @@
         "laravel/lumen-framework": "^8.0",
         "mongodb/mongodb": "^1.8",
         "predis/predis": "^1.1",
+        "swooletw/laravel-swoole": "^2.8",
         "tymon/jwt-auth": "^1"
     },
     "require-dev": {

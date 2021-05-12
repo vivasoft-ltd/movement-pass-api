@@ -34,6 +34,7 @@ RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/i
 RUN docker-php-ext-install gd bcmath calendar gettext
 RUN pecl install redis && docker-php-ext-enable redis
 RUN pecl install mongodb && docker-php-ext-enable mongodb
+RUN pecl install swoole && docker-php-ext-enable swoole
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -52,5 +53,8 @@ COPY --chown=www:www ./_source_/ /var/www
 USER www
 
 # Expose port 9000 and start php-fpm server
-EXPOSE 9000
-CMD ["php-fpm"]
+#EXPOSE 9000
+#CMD ["php-fpm"]
+
+EXPOSE 1225
+CMD ["php", "artisan", "swoole:http", "start"]
