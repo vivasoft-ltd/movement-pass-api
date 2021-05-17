@@ -22,16 +22,7 @@ class OneApplicationPerDayRule implements Rule
 
     public function passes($attribute, $value)
     {
-        //@todo - Until we restart swoole the query always counting same.
-
-        $count = $this->user
-            ->applications
-            ->whereBetween('created_at',[
-                Carbon::today()->format('Y-m-d 00:00:00'),
-                Carbon::today()->format('Y-m-d 23:59:59')
-            ])->count();
-
-        Log::debug($count);
+        $count = Application::where('user_id', $this->user->getIdAttribute())->where('approved', false)->count();
 
         return $count < 1;
     }
