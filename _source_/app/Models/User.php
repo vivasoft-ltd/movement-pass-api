@@ -45,4 +45,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return 'phone';
     }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
 }

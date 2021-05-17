@@ -13,25 +13,25 @@ class PassApplicationAction
     public function __invoke(PassDTO $dto)
     {
         $data = [
-            'user' => $dto->user->toArray(),
             'trip' => $dto->trip->value(),
             'from' => $dto->from,
             'pass' => [
-                'startDate' => $dto->pass->startDate->format('Y-m-d H:i:s'),
+                'start_date' => $dto->pass->startDate->format('Y-m-d H:i:s'),
                 'duration' => $dto->pass->duration,
                 'reason' => $dto->pass->reason,
             ],
-            'vehicleOptionEnabled' => $dto->vehicleOptionEnabled,
+            'vehicle_enabled' => $dto->vehicleOptionEnabled,
             'vehicle' => [
-                'selfDrive' => $dto->vehicle->selfDrive ?? null,
+                'self_drive' => $dto->vehicle->selfDrive ?? null,
                 'number' => $dto->vehicle->number ?? null,
                 'driver' => [
                     'name' => $dto->vehicle->driver->name ?? null,
                     'licence' => $dto->vehicle->driver->licence ?? null
                 ]
-            ]
+            ],
+            'approved' => false,
         ];
 
-        return Application::create($data);
+        return $dto->user->applications()->create($data);
     }
 }
