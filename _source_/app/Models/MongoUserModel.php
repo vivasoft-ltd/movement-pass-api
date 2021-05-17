@@ -16,6 +16,6 @@ abstract class MongoUserModel extends Model implements
     AuthorizableContract,
     CanResetPasswordContract
 {
-    use Authenticatable, CanResetPassword, MustVerifyEmail;
+    use Authenticatable, CanResetPassword;
 }
 

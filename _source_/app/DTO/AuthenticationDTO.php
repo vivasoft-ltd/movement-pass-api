@@ -5,28 +5,33 @@ namespace App\DTO;
 
 
 use Illuminate\Http\Request;
+use ReflectionException;
 
-class AuthenticationDTO
+class AuthenticationDTO extends DTO
 {
-    public string $email;
+    public string $phone;
 
     public string $password;
 
+    public bool $allowLoginOnlyForActiveUser = true;
+
+    /**
+     * @throws ReflectionException
+     */
     public static function createFromRequest(Request $request): self
     {
-        $self = new self();
-
-        $self->email = $request->input('email');
-        $self->password = $request->input('password');
-
-        return $self;
+        return static::self([
+            'phone'     => $request->input('phone'),
+            'password'  => $request->input('password'),
+        ]);
     }
 
-    public function credentials(): array
+    public function getLoginCredential(): array
     {
         return [
-            'email'     => $this->email,
+            'phone'     => $this->phone,
             'password'  => $this->password,
+            'active'    => $this->allowLoginOnlyForActiveUser,
         ];
     }
 }

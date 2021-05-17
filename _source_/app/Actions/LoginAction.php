@@ -11,8 +11,10 @@ class LoginAction
 {
     public function __invoke(AuthenticationDTO $dto): bool|string
     {
-        if ($token = Auth::attempt($dto->credentials()) ) {
-            return $token;
+        $cred = $dto->getLoginCredential();
+
+        if (Auth::validate($cred) ) {
+            return Auth::attempt($cred);
         }
 
         return false;

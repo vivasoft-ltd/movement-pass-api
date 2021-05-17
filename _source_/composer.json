@@ -9,6 +9,7 @@
         "illuminate/redis": "^8.40",
         "jenssegers/mongodb": "^3.8",
         "laravel/lumen-framework": "^8.0",
+        "league/flysystem": " ~1.0",
         "mongodb/mongodb": "^1.8",
         "predis/predis": "^1.1",
         "swooletw/laravel-swoole": "^2.8",

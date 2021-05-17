@@ -2,11 +2,11 @@
 
 namespace App\Listeners;
 
-use App\Events\ExampleEvent;
+use App\Events\Registered;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class ExampleListener
+class VerifyPhone implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -21,11 +21,17 @@ class ExampleListener
     /**
      * Handle the event.
      *
-     * @param  \App\Events\ExampleEvent  $event
+     * @param  \App\Events\Registered  $registered
      * @return void
      */
-    public function handle(ExampleEvent $event)
+    public function handle(Registered $registered)
     {
-        //
+        $user = $registered->user;
+
+        $user->update([
+            'code' => mt_rand(1111, 9999),
+        ]);
+
+        //@todo - send code via SMS gate
     }
 }
