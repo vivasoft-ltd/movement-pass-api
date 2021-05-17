@@ -15,6 +15,13 @@ use SwooleTW\Http\Helpers\Dumper;
 
 class PassController extends Controller
 {
+    public function index(Request $request)
+    {
+        return response()->json(
+            $request->user()->applications
+        );
+    }
+
     public function store(Request $request, PassApplicationAction $passApplicationAction)
     {
         $this->validate($request, [

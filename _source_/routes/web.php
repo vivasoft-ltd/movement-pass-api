@@ -24,5 +24,6 @@ $router->post('/login', 'AuthController@login');
 $router->group(['middleware' => 'auth'], function () use ($router)
 {
     $router->get('/user', 'AuthController@me');
+    $router->get('/pass', 'PassController@index');
     $router->post('/pass/create', 'PassController@store');
 });
