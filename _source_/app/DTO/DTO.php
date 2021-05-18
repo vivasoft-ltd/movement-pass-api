@@ -5,7 +5,6 @@ namespace App\DTO;
 
 use ReflectionClass;
 use ReflectionProperty;
-use SwooleTW\Http\Helpers\Dumper;
 
 abstract class DTO
 {
