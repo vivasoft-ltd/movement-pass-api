@@ -1,8 +1,5 @@
 FROM php:8.0-fpm
 
-# Copy composer.lock and composer.json
-COPY ./_source_/ /var/www/
-
 # Set working directory
 WORKDIR /var/www
 
@@ -23,7 +20,8 @@ RUN apt-get update && apt-get install -y \
     vim \
     unzip \
     git \
-    curl
+    curl \
+    supervisor
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -46,17 +44,8 @@ RUN useradd -u 1000 -ms /bin/bash -g www www
 # Copy existing application directory contents
 COPY ./_source_/ /var/www
 
-# Copy existing application directory permissions
-COPY --chown=www:www ./_source_/ /var/www
-
-# Change current user to www
-USER www
-
 RUN composer install
 
-# Expose port 9000 and start php-fpm server
-#EXPOSE 9000
-#CMD ["php-fpm"]
-
 EXPOSE 1225
-CMD ["php", "artisan", "swoole:http", "start"]
+
+CMD ["/usr/bin/supervisord"]
