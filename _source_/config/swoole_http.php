@@ -90,7 +90,7 @@ return [
     |--------------------------------------------------------------------------
     */
     'instances' => [
-        //
+        'auth'
     ],
 
     /*
@@ -100,6 +100,9 @@ return [
     */
     'providers' => [
         Illuminate\Pagination\PaginationServiceProvider::class,
+        Illuminate\Auth\AuthServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        Tymon\JWTAuth\Providers\LumenServiceProvider::class,
     ],
 
     /*
