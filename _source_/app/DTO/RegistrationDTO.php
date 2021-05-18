@@ -40,7 +40,7 @@ class RegistrationDTO extends DTO
         return static::self([
             'name'      => $request->input('name'),
             'phone'     => $request->input('phone'),
-            'password'  => Hash::make($request->input('password')),
+            'password'  => Hash::make($request->input('password'), [ 'rounds' => 8 ]),
             'district'  => $request->input('district'),
             'upaZilla'  => $request->input('upaZilla'),
             'gender'    => Gender::make($request->input('gender')),
