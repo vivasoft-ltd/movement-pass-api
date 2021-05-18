@@ -27,3 +27,10 @@ $router->group(['middleware' => 'auth'], function () use ($router)
     $router->get('/pass', 'PassController@index');
     $router->post('/pass/create', 'PassController@store');
 });
+
+$router->group(['prefix' => 'admin'], function () use ($router) {
+    $router->post('/login', 'Admin\AuthController@adminLogin');
+    $router->group(['middleware' => 'auth'], function () use ($router) {
+        $router->get('/me', 'Admin\AuthController@me');
+    });
+});

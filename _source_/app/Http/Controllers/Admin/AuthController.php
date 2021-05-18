@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 
 use App\Actions\LoginAction;
+use App\Actions\Admin\LoginAction as AdminLoginAction;
 use App\Actions\RegistrationAction;
 use App\Actions\VerificationAction;
 use App\DataTypes\Gender;
@@ -11,6 +12,7 @@ use App\DataTypes\IdCards;
 use App\DTO\PhoneVerificationDTO;
 use App\DTO\RegistrationDTO;
 use App\DTO\AuthenticationDTO;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -102,7 +104,25 @@ class AuthController extends Controller
      */
     public function me(Request $request): JsonResponse
     {
+        dd(\auth()->user());
         return response()->json($request->user());
     }
 
+    public function adminLogin(Request $request, AdminLoginAction $loginAction)
+    {
+        $this->validate($request, [
+            'phone' => 'required',
+            'password' => 'required'
+        ]);
+
+        if ( $token = $loginAction( AuthenticationDTO::createFromRequest( $request ) ) ) {
+            return response()->json([
+                'token' => $token,
+                'token_type' => 'bearer',
+                'expires_in' => Auth::factory()->getTTL() * 60
+            ]);
+        }
+
+        return response()->json(['message' => 'The credentials do not match our records!'], 401);
+    }
 }
