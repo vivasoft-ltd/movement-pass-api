@@ -16,6 +16,10 @@ class Admin extends Authenticatable implements JWTSubject
         'id'
     ];
 
+    protected $hidden = [
+        'password', 'created_at', 'updated_at'
+    ];
+
     public function can($abilities, $arguments = [])
     {
         // TODO: Implement can() method.
@@ -39,15 +43,5 @@ class Admin extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
-    }
-
-    public function getAuthIdentifierName()
-    {
-        return 'phone';
-    }
-
-    public function applications()
-    {
-        return $this->hasMany(Application::class);
     }
 }

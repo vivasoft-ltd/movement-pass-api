@@ -14,16 +14,10 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return 'Login first';
 });
+$router->post('/login', 'Admin\AuthController@login');
 
-$router->post('/register', 'AuthController@register');
-$router->post('/verify', 'AuthController@verify');
-$router->post('/login', 'AuthController@login');
-
-$router->group(['middleware' => 'auth'], function () use ($router)
-{
-    $router->get('/user', 'AuthController@me');
-    $router->get('/pass', 'PassController@index');
-    $router->post('/pass/create', 'PassController@store');
+$router->group(['middleware' => 'auth:admin'], function () use ($router) {
+    $router->get('/me', 'Admin\AuthController@me');
 });
