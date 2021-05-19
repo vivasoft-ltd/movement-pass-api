@@ -30,7 +30,7 @@ class PassController extends Controller
             'destination.location' => 'required',
             'destination.district' => 'required',
             'destination.upa_zilla' => 'required',
-            'pass.start_date' => ['required', 'date', new OneApplicationPerDayRule($request->user())],
+//            'pass.start_date' => ['required', 'date', new OneApplicationPerDayRule($request->user())],
             'pass.duration' => ['required', 'between:1,12'],
             'pass.reason' => 'required',
             'vehicle_enabled' => ['required', 'boolean'],

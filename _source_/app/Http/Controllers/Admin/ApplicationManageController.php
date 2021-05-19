@@ -18,13 +18,13 @@ class ApplicationManageController extends Controller
 
     public function approve($id): JsonResponse
     {
+        /** @var Application $application */
         $application = Application::find($id);
-        if (!is_null($application->approved)) {
+        if (!$application && !is_null($application->approved)) {
             return response()->json(['message' => 'Unable to update application status'], 422);
         }
 
-        $application->approved = true;
-        $application->save();
+        $application->approved();
 
         event(new ApplicationApproved($application));
 
@@ -33,13 +33,13 @@ class ApplicationManageController extends Controller
 
     public function reject($id): JsonResponse
     {
+        /** @var Application $application */
         $application = Application::find($id);
-        if (!is_null($application->approved)) {
+        if (!$application && !is_null($application->approved)) {
             return response()->json(['message' => 'Unable to update application status'], 422);
         }
 
-        $application->approved = false;
-        $application->save();
+        $application->reject();
 
         return response()->json(['message' => 'Application rejected successfully']);
     }
