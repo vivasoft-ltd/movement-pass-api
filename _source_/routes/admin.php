@@ -20,4 +20,8 @@ $router->post('/login', 'Admin\AuthController@login');
 
 $router->group(['middleware' => 'auth:admin'], function () use ($router) {
     $router->get('/me', 'Admin\AuthController@me');
+
+    $router->get('/applications', 'Admin\ApplicationManageController@index');
+    $router->get('/applications/{id}/approve', 'Admin\ApplicationManageController@approve');
+    $router->get('/applications/{id}/reject', 'Admin\ApplicationManageController@reject');
 });
