@@ -12,7 +12,7 @@ class ApplicationManageController extends Controller
     public function index(Request $request): JsonResponse
     {
         return response()->json(
-            Application::orderBy('created_at')->simplePaginate(10)
+            Application::orderBy('created_at')->simplePaginate()
         );
     }
 
@@ -20,11 +20,11 @@ class ApplicationManageController extends Controller
     {
         /** @var Application $application */
         $application = Application::find($id);
-        if (!$application && !is_null($application->approved)) {
+        if (!$application || !is_null($application->approved)) {
             return response()->json(['message' => 'Unable to update application status'], 422);
         }
 
-        $application->approved();
+        $application->approve();
 
         event(new ApplicationApproved($application));
 
@@ -35,7 +35,7 @@ class ApplicationManageController extends Controller
     {
         /** @var Application $application */
         $application = Application::find($id);
-        if (!$application && !is_null($application->approved)) {
+        if (!$application || !is_null($application->approved)) {
             return response()->json(['message' => 'Unable to update application status'], 422);
         }
 

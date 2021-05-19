@@ -24,7 +24,7 @@ class Application extends Model
     {
         $this->approved = true;
         $this->approved_at = Carbon::now();
-        $this->approved_by = auth('admin')->id;
+        $this->approved_by = auth('admin')->user()->id;
         $this->save();
     }
 
@@ -32,7 +32,7 @@ class Application extends Model
     {
         $this->approved = true;
         $this->rejected_at = Carbon::now();
-        $this->rejected_by = auth('admin')->id;
+        $this->rejected_by = auth('admin')->user()->id;
         $this->save();
     }
 }
