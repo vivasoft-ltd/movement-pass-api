@@ -41,11 +41,6 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function getAuthIdentifierName()
-    {
-        return 'phone';
-    }
-
     public function applications()
     {
         return $this->hasMany(Application::class);
