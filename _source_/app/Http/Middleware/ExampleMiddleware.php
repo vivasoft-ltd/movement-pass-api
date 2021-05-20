@@ -22,6 +22,7 @@ class ExampleMiddleware
         }
 
         $response->header('Access-Control-Allow-Origin', '*');
+        $response->header('Access-Control-Allow-Headers', '*');
 
         return $response;
     }
