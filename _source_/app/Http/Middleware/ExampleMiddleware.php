@@ -15,7 +15,14 @@ class ExampleMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $request->header('Access-Control-Allow-Origin', '*');
-        return $next($request);
+        if ($request->isMethod('OPTIONS')) {
+            $response = new \Illuminate\Http\Response("", 200);
+        } else {
+            $response = $next($request);
+        }
+
+        $response->header('Access-Control-Allow-Origin', '*');
+
+        return $response;
     }
 }
