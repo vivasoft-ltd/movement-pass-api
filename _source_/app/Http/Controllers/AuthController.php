@@ -34,14 +34,14 @@ class AuthController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'password' => 'required',
-            'phone' => ['required', 'regex:/^(?:\+88|01)?(?:\d{11}|\d{13})$/', Rule::unique('users', 'phone')],
+            'phone' => ['required', 'regex:/^(?:\+88|01)?(?:\d{11}|\d{13})$/'],
             'district' => 'required',
             'upaZilla' => 'required',
             'gender' => ['required', Rule::in(Gender::toArray())],
             'birthdate' => ['required', 'date'],
             'cardType' => ['required', Rule::in(IdCards::toArray())],
             'cardNumber' => 'required',
-            'image' => ['required', 'image', 'max:800'],
+            //'image' => ['required', 'image', 'max:800'],
         ]);
 
         $user = $registrationAction(RegistrationDTO::createFromRequest($request));

@@ -16,7 +16,7 @@ class RegistrationAction
     {
         $data = $registrationData->toArray();
 
-        $data['image'] = (new UploadAction)(Arr::pull($data, 'image'), 'users');
+        //$data['image'] = (new UploadAction)(Arr::pull($data, 'image'), 'users');
 
         $user = User::create($data);
 

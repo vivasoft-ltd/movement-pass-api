@@ -15,7 +15,7 @@ services:
       SERVICE_TAGS: dev
     working_dir: /var/www
     ports:
-      - "1225:1225"
+      - "1215:1215"
       - "9000:9000"
     volumes:
       - ./_source_/:/var/www
