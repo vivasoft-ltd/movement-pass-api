@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Actions\Admin\LoginAction as AdminLoginAction;
 use App\DTO\AuthenticationDTO;
+use App\Events\LoggedIn;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -27,6 +28,7 @@ class AuthController extends Controller
         ]);
 
         if ($token = $loginAction(AuthenticationDTO::createFromRequest($request))) {
+            event(new LoggedIn($this->getAdminUser(), $token));
             return response()->json([
                 'token' => $token,
                 'token_type' => 'bearer',
@@ -35,5 +37,15 @@ class AuthController extends Controller
         }
 
         return response()->json(['message' => 'The credentials do not match our records!'], 401);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function logout(Request $request): JsonResponse
+    {
+        parent::logout($request);
+        return response()->json(['message' => 'Logged out successfully']);
     }
 }

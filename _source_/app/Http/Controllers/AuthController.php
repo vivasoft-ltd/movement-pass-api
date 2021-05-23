@@ -8,9 +8,10 @@ use App\Actions\RegistrationAction;
 use App\Actions\VerificationAction;
 use App\DataTypes\Gender;
 use App\DataTypes\IdCards;
+use App\DTO\AuthenticationDTO;
 use App\DTO\PhoneVerificationDTO;
 use App\DTO\RegistrationDTO;
-use App\DTO\AuthenticationDTO;
+use App\Events\LoggedIn;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -86,6 +87,8 @@ class AuthController extends Controller
         ]);
 
         if ( $token = $loginAction( AuthenticationDTO::createFromRequest( $request ) ) ) {
+
+            event(new LoggedIn(auth()->user(), $token));
             return response()->json([
                 'token' => $token,
                 'token_type' => 'bearer',
@@ -103,6 +106,16 @@ class AuthController extends Controller
     public function me(Request $request): JsonResponse
     {
         return response()->json($request->user());
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function logout(Request $request): JsonResponse
+    {
+        parent::logout($request);
+        return response()->json(['message' => 'Logged out successfully']);
     }
 
 }

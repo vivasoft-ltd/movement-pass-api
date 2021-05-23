@@ -15,5 +15,8 @@ class EventServiceProvider extends ServiceProvider
         \App\Events\Registered::class => [
             \App\Listeners\VerifyPhone::class,
         ],
+        \App\Events\LoggedIn::class => [
+            \App\Listeners\TokenSave::class,
+        ],
     ];
 }
