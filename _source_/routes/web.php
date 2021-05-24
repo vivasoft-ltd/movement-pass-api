@@ -20,10 +20,13 @@ $router->get('/', function () use ($router) {
 $router->post('/register', 'AuthController@register');
 $router->post('/verify', 'AuthController@verify');
 $router->post('/login', 'AuthController@login');
+$router->get('/refresh', 'AuthController@refresh');
 
 $router->group(['middleware' => 'auth'], function () use ($router)
 {
     $router->get('/user', 'AuthController@me');
     $router->get('/pass', 'PassController@index');
     $router->post('/pass/create', 'PassController@store');
+
+    $router->get('/logout', 'AuthController@logout');
 });
