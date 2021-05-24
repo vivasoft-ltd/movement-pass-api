@@ -6,19 +6,15 @@ namespace App\Http\Controllers;
 use App\Actions\PassApplicationAction;
 use App\DataTypes\Trip;
 use App\DTO\PassDTO;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
-use App\Rules\OneApplicationPerDayRule;
-use SwooleTW\Http\Helpers\Dumper;
 
 class PassController extends Controller
 {
     public function index(Request $request)
     {
         return response()->json(
-            $request->user()->applications
+            $request->user()->applications()->simplePaginate(25)
         );
     }
 
