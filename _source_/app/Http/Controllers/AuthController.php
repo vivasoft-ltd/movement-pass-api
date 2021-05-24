@@ -12,6 +12,7 @@ use App\DTO\AuthenticationDTO;
 use App\DTO\PhoneVerificationDTO;
 use App\DTO\RegistrationDTO;
 use App\Events\LoggedIn;
+use App\Http\Controllers\Traits\TokenHelper;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +22,7 @@ use ReflectionException;
 
 class AuthController extends Controller
 {
+    use TokenHelper;
     /**
      * Register user
      *
@@ -114,7 +116,7 @@ class AuthController extends Controller
      */
     public function logout(Request $request): JsonResponse
     {
-        parent::logout($request);
+        $this->deleteCurrentToken($request);
         return response()->json(['message' => 'Logged out successfully']);
     }
 

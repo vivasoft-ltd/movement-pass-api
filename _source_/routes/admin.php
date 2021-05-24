@@ -18,7 +18,7 @@ $router->get('/', function () use ($router) {
 });
 $router->post('/login', 'Admin\AuthController@login');
 
-$router->group(['middleware' => ['auth:admin', 'jwtauth']], function () use ($router) {
+$router->group(['middleware' => ['auth:admin', 'tokenExists']], function () use ($router) {
     $router->get('/me', 'Admin\AuthController@me');
     $router->get('/logout', 'Admin\AuthController@logout');
 

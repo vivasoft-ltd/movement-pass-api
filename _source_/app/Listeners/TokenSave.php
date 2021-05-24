@@ -29,7 +29,6 @@ class TokenSave
         $user = $loggedIn->user;
 
         $decodedToken['iss'] = get_class($user);
-        $decodedToken['active'] = true;
 
         $model = new AccessToken($decodedToken);
         $model->save();

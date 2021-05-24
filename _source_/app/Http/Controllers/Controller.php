@@ -13,12 +13,4 @@ class Controller extends BaseController
     {
         return Auth::guard('admin')->user();
     }
-
-    protected function logout(Request $request)
-    {
-        $decodedToken = app('tymon.jwt.provider.jwt')->decode($request->bearerToken());
-        $token = AccessToken::where(['jti' => $decodedToken['jti']])->get()->first();
-        $token->active = false;
-        $token->save();
-    }
 }

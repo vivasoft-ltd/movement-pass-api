@@ -5,12 +5,14 @@ use App\Actions\Admin\LoginAction as AdminLoginAction;
 use App\DTO\AuthenticationDTO;
 use App\Events\LoggedIn;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\TokenHelper;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    use TokenHelper;
     /**
      * @param Request $request
      * @return JsonResponse
@@ -45,7 +47,7 @@ class AuthController extends Controller
      */
     public function logout(Request $request): JsonResponse
     {
-        parent::logout($request);
+        $this->deleteCurrentToken($request);
         return response()->json(['message' => 'Logged out successfully']);
     }
 }

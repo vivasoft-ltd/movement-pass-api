@@ -78,7 +78,7 @@ $app->middleware([
 
  $app->routeMiddleware([
      'auth' => App\Http\Middleware\Authenticate::class,
-     'jwtauth' => App\Http\Middleware\JWTTokenValidate::class,
+     'tokenExists' => App\Http\Middleware\JWTTokenValidate::class,
  ]);
 
 /*

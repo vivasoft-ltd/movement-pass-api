@@ -39,9 +39,9 @@ class JWTTokenValidate
         $decodedToken = app('tymon.jwt.provider.jwt')->decode($request->bearerToken());
         $user = $this->auth->guard('admin')->user();
 
-        $isTokenActive = AccessToken::where(['sub' => $user->id, 'jti' => $decodedToken['jti'], 'active' => true])->count();
+        $isTokenActive = AccessToken::where(['jti' => $decodedToken['jti']])->count();
         if (!$isTokenActive) {
-            return response('Token revoked.', 401);
+            return response('Invalid Token.', 401);
         }
 
         return $next($request);
