@@ -46,6 +46,6 @@ COPY ./_source_/ /var/www
 
 RUN composer install
 
-EXPOSE 1225
+EXPOSE 1215
 
 CMD ["/usr/bin/supervisord"]
