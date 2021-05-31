@@ -20,6 +20,7 @@ $router->post('/login', 'Admin\AuthController@login');
 $router->get('/refresh', 'Admin\AuthController@refresh');
 
 $router->group(['middleware' => 'auth:admin'], function () use ($router) {
+    $router->post('/create', 'Admin\AuthController@register');
     $router->get('/me', 'Admin\AuthController@me');
     $router->get('/logout', 'Admin\AuthController@logout');
     $router->get('/applications', 'Admin\ApplicationManageController@index');
