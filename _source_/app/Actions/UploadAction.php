@@ -39,7 +39,6 @@ class UploadAction
                 $command = $s3Client->getCommand('PutObject', [
                     'Bucket' => config('filesystems.disks.s3.bucket'),
                     'Key'    => $output['file'] = $this->prefixS3Dir($path),
-                    'Expires'=> 300,
                 ]);
 
                 $request = $s3Client->createPresignedRequest($command, Carbon::now()->addMinutes(5));
@@ -52,6 +51,11 @@ class UploadAction
         }
 
         return $output;
+    }
+
+    public function makeS3FileVisibilityPublic($key): bool
+    {
+        return Storage::disk('s3')->setVisibility($key, 'public');
     }
 
     protected function isS3FileSystem(): bool

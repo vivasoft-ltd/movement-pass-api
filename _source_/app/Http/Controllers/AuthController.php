@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\LoginAction;
 use App\Actions\RegistrationAction;
+use App\Actions\UploadAction;
 use App\Actions\VerificationAction;
 use App\DataTypes\Gender;
 use App\DataTypes\IdCards;
@@ -47,6 +48,26 @@ class AuthController extends Controller
         $user = $registrationAction(RegistrationDTO::createFromRequest($request));
 
         return response()->json($user);
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function confirmImageUpload(Request $request, RegistrationAction $action): JsonResponse
+    {
+        $this->validate($request, [
+            'phone' => ['required', 'regex:/^(?:\+88|01)?(?:\d{11}|\d{13})$/', Rule::exists('users', 'phone')]
+        ]);
+
+        if ($action->confirmImageUpload($request->phone)) {
+            return response()->json([
+                'message' => 'Image visibility changed to public'
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Something is wrong happen, please try again leter.'
+        ], 400);
     }
 
     /**

@@ -8,6 +8,7 @@ use App\DTO\RegistrationDTO;
 use App\Events\Registered;
 use App\Models\User;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use ReflectionException;
 
@@ -43,5 +44,14 @@ class RegistrationAction
         event(new Registered($user));
 
         return array_merge($output, $user->toArray());
+    }
+
+    public function confirmImageUpload($phone): bool
+    {
+        if ($user = User::where('phone', $phone)->first()) {
+            return (new UploadAction)->makeS3FileVisibilityPublic($user->image);
+        }
+
+        return false;
     }
 }
