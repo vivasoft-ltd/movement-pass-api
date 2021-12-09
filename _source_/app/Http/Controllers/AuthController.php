@@ -66,7 +66,7 @@ class AuthController extends Controller
         }
 
         return response()->json([
-            'message' => 'Something is wrong happen, please try again leter.'
+            'message' => 'Something went wrong, please try again later.'
         ], 400);
     }
 
