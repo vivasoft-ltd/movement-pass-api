@@ -41,7 +41,7 @@ class AuthController extends Controller
             'birthdate' => ['required', 'date'],
             'cardType' => ['required', Rule::in(IdCards::toArray())],
             'cardNumber' => 'required',
-            'image' => ['required', 'image', 'max:800'],
+            'image' => ['image', 'max:800'],
         ]);
 
         $user = $registrationAction(RegistrationDTO::createFromRequest($request));

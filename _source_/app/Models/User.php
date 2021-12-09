@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\MongoUserModel as Authenticatable;
+use Illuminate\Support\Facades\Storage;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -18,6 +19,10 @@ class User extends Authenticatable implements JWTSubject
 
     protected $hidden = [
         'password', 'updated_at', 'created_at'
+    ];
+
+    protected $appends = [
+        'image_url'
     ];
 
     public function can($abilities, $arguments = [])
@@ -43,6 +48,11 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function getImageUrlAttribute(): string
+    {
+        return Storage::url($this->image);
     }
 
     public function applications()

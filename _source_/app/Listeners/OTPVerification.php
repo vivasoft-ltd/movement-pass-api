@@ -29,7 +29,7 @@ class OTPVerification implements ShouldQueue
         $user = $registered->user;
 
         $user->update([
-            'code' => config('demo_verification_code') ?? mt_rand(1111, 9999),
+            'code' => config('app.demo_verification_code') ?? mt_rand(1111, 9999),
         ]);
 
         //@todo - send code via SMS gate

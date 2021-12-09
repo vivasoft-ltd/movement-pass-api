@@ -31,7 +31,7 @@ class RegistrationDTO extends DTO
 
     public string $cardNumber;
 
-    public UploadedFile $image;
+    public ?UploadedFile $image;
 
     public bool $active;
 
