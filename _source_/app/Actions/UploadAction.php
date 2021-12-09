@@ -1,12 +1,10 @@
 <?php
-
-
 namespace App\Actions;
-
 
 use Aws\S3\Exception\S3Exception;
 use Exception;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use JetBrains\PhpStorm\ArrayShape;
@@ -44,7 +42,10 @@ class UploadAction
                     'Expires'=> 300,
                 ]);
 
-                $output['signedUrl'] = $s3Client->execute($command);
+                $request = $s3Client->createPresignedRequest($command, Carbon::now()->addMinutes(5));
+
+                $output['signedUrl'] = (string) $request->getUri();
+
             } catch (Exception|S3Exception $exception) {
                 Log::error($exception->getMessage());
             }

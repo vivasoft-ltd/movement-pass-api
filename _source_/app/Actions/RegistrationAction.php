@@ -18,6 +18,8 @@ class RegistrationAction
      */
     public function __invoke(RegistrationDTO $registrationData)
     {
+        $output = [];
+
         $data = $registrationData->toArray();
 
         if ($data['image']) {
@@ -30,7 +32,7 @@ class RegistrationAction
         } else {
             [
                 'image' => $data['image'],
-                'signedUrl' => $data['signedUrl'],
+                'signedUrl' => $output['signedUrl'],
             ] = (new UploadAction)->createS3SignedUrl(
                 'users/' . Str::random()
             );
@@ -40,6 +42,6 @@ class RegistrationAction
 
         event(new Registered($user));
 
-        return $user;
+        return array_merge($output, $user->toArray());
     }
 }
