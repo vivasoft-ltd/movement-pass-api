@@ -21,12 +21,12 @@ class UploadAction
         return Storage::putFile($path, $file, $options);
     }
 
-    #[ArrayShape(['signedUrl' => "string", 'image' => "string"])]
+    #[ArrayShape(['signedUrl' => "string", 'file' => "string"])]
     public function createS3SignedUrl($path): array
     {
         $output = [
             'signedUrl' => '',
-            'image' => '',
+            'file' => '',
         ];
 
         if ($this->isS3FileSystem()) {
@@ -38,7 +38,7 @@ class UploadAction
 
                 $command = $s3Client->getCommand('PutObject', [
                     'Bucket' => config('filesystems.disks.s3.bucket'),
-                    'Key'    => $output['image'] = $this->prefixS3Dir($path),
+                    'Key'    => $output['file'] = $this->prefixS3Dir($path),
                     'Expires'=> 300,
                 ]);
 

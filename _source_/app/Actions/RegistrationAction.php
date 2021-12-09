@@ -31,7 +31,7 @@ class RegistrationAction
             );
         } else {
             [
-                'image' => $data['image'],
+                'file' => $data['image'],
                 'signedUrl' => $output['signedUrl'],
             ] = (new UploadAction)->createS3SignedUrl(
                 'users/' . Str::random()
