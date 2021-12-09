@@ -16,6 +16,10 @@ class User extends Authenticatable implements JWTSubject
         'id'
     ];
 
+    protected $hidden = [
+        'password', 'updated_at', 'created_at'
+    ];
+
     public function can($abilities, $arguments = [])
     {
         // TODO: Implement can() method.

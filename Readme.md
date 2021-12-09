@@ -1,16 +1,18 @@
 # Installation
 
 1. Pull codebase
-2. Run `docker kill $(docker container ls -q)` to stop current containers.
+2. (Optional) Run `docker kill $(docker container ls -q)` to stop current containers.
 3. Run `docker-compose up -d` to start the project
+4. Update `.env` file (see `.env.example`).
+6. Navigate to project directory and install composer `docker-compose exec pass_app composer install`
+7. Restart supervisor: `docker-compose exec pass_app service supervisor restart` 
 
 # Application
 
-1. Update `.env` file (see `.env.example`).
-2. API (Swoole)  - `http://127.0.0.1:8020`
-3. API (PHP-FPM) - `http://127.0.0.1:8820`
-4. Mongo Express Server - `http://127.0.0.1:8021` (Basic Auth: username: `vivasoft`, password: `vivasoft`)
-5. Mail Catcher - `http://127.0.0.1:60220`
+1. API (Swoole)  - `http://127.0.0.1:8020`
+2. API (PHP-FPM) - `http://127.0.0.1:8820`
+3. Mongo Express Server - `http://127.0.0.1:8021` (Basic Auth: username: `vivasoft`, password: `vivasoft`)
+4. Mail Catcher - `http://127.0.0.1:60220`
 
 # Access Docker Container
 

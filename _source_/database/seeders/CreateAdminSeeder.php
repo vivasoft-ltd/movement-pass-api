@@ -19,15 +19,15 @@ class CreateAdminSeeder extends Seeder
         $adminUsers = [
             [
                 'name'  => 'System Admin',
-                'phone' => '01920409252',
+                'phone' => '01711000001',
                 'role'  => AdminRole::admin()->value(),
                 'image' => 'https://i.pravatar.cc/150?img=53',
                 'password' => Hash::make('vivasoft',[ 'rounds' => 8 ]),
                 'active' => true,
             ],
             [
-                'name'  => 'Samiul Amin',
-                'phone' => '01817536215',
+                'name'  => 'Site Manaager',
+                'phone' => '01911000001',
                 'role'  => AdminRole::manager()->value(),
                 'image' => 'https://i.pravatar.cc/150?img=53',
                 'password' => Hash::make('vivasoft',[ 'rounds' => 8 ]),

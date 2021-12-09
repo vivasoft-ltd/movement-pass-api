@@ -13,7 +13,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         \App\Events\Registered::class => [
-            \App\Listeners\VerifyPhone::class,
+            \App\Listeners\OTPVerification::class,
         ],
     ];
 }

@@ -6,7 +6,7 @@ use App\Events\Registered;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class VerifyPhone implements ShouldQueue
+class OTPVerification implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -29,7 +29,7 @@ class VerifyPhone implements ShouldQueue
         $user = $registered->user;
 
         $user->update([
-            'code' => mt_rand(1111, 9999),
+            'code' => config('demo_verification_code') ?? mt_rand(1111, 9999),
         ]);
 
         //@todo - send code via SMS gate
