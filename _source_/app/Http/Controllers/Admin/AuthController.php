@@ -28,7 +28,9 @@ class AuthController extends Controller
      */
     public function me(Request $request): JsonResponse
     {
-        return response()->json($this->getAdminUser());
+        return response()->json([
+            'user' => $this->getAdminUser()
+        ]);
     }
 
     public function register(Request $request, CreateAdminAction $createAdminAction)
