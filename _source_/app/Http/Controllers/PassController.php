@@ -14,7 +14,10 @@ class PassController extends Controller
     public function index(Request $request)
     {
         return response()->json(
-            $request->user()->applications()->simplePaginate(25)
+            $request->user()
+                ->applications()
+                ->orderBy('created_at', 'desc')
+                ->paginate(10)
         );
     }
 
@@ -31,7 +34,7 @@ class PassController extends Controller
             'pass.reason' => 'required',
             'vehicle_enabled' => ['required', 'boolean'],
             'vehicle.self_drive' => ['required', 'boolean'],
-            'vehicle.number' => ['required'],
+            'vehicle.number' => [ Rule::requiredIf( function () use ($request) { !$request->input('vehicle_enabled'); } ) ],
             'vehicle.driver.name' => [ Rule::requiredIf( function () use ($request) { !$request->input('vehicle.self_drive'); } ) ],
             'vehicle.driver.licence' => [ Rule::requiredIf( function () use ($request) { !$request->input('vehicle.self_drive'); } ) ],
         ]);

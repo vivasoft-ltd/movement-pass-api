@@ -12,7 +12,9 @@ class ApplicationManageController extends Controller
     public function index(Request $request): JsonResponse
     {
         return response()->json(
-            Application::orderBy('created_at')->simplePaginate()
+            Application::with('user')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10)
         );
     }
 

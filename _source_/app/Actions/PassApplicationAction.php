@@ -15,6 +15,11 @@ class PassApplicationAction
         $data = [
             'trip' => $dto->trip->value(),
             'from' => $dto->from,
+            'destination' => [
+                'location' => $dto->destination->location,
+                'district' => $dto->destination->district,
+                'upa_zilla' => $dto->destination->upaZilla,
+            ],
             'pass' => [
                 'start_date' => $dto->pass->startDate->format('Y-m-d H:i:s'),
                 'duration' => $dto->pass->duration,
@@ -29,7 +34,7 @@ class PassApplicationAction
                     'licence' => $dto->vehicle->driver->licence ?? null
                 ]
             ],
-            'approved' => false,
+            'approved' => null
         ];
 
         return $dto->user->applications()->create($data);

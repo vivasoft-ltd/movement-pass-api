@@ -30,7 +30,7 @@ class Application extends Model
 
     public function reject()
     {
-        $this->approved = true;
+        $this->approved = false;
         $this->rejected_at = Carbon::now();
         $this->rejected_by = auth('admin')->user()->id;
         $this->save();
