@@ -14,6 +14,10 @@
 3. Mongo Express Server - `http://127.0.0.1:8021` (Basic Auth: username: `vivasoft`, password: `vivasoft`)
 4. Mail Catcher - `http://127.0.0.1:60220`
 
+# To use Local Storage
+1. Update `.env` file :`FILESYSTEM_DRIVER=public`
+2. Run following command: `docker-compose exec pass_app ln -s /var/www/storage/app/public /var/www/public/storage`
+
 # Access Docker Container
 
 1. To access application container: `docker-compose exec pass_app bash`
