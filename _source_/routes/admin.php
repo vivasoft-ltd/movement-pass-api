@@ -26,4 +26,5 @@ $router->group(['middleware' => 'auth:admin'], function () use ($router) {
     $router->get('/applications', 'Admin\ApplicationManageController@index');
     $router->get('/applications/{id}/approve', 'Admin\ApplicationManageController@approve');
     $router->get('/applications/{id}/reject', 'Admin\ApplicationManageController@reject');
+    $router->get('/users', 'Admin\UserManageController@index');
 });
